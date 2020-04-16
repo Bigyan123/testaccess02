@@ -791,6 +791,12 @@ namespace KountAccessSdk.Service
             ValidateSession(sessionId);
 
             var trusted = new DataSetElements().WithTrusted().Build();
+            var behavioSec = new DataSetElements().WithBehavioSec().Build();
+            // uniq is required if trusted or behavio sec data is requested
+            if ((((i & trusted) == trusted || (i & behavioSec) == behavioSec)))
+            {
+                ValidateUniq(uniq);
+            }
 
             var velocity = new DataSetElements().WithVelocity().Build();
             var decision = new DataSetElements().WithDecision().Build();
